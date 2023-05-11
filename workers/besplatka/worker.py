@@ -3,14 +3,19 @@ from bs4 import BeautifulSoup as bs
 from logger import Logger
 from config import IMPORT_URL, WORKER_NAME, WORKER_DATA_URL, SECRET_WORKER_KEY
 import time
+import sys
+sys.stdout.flush()
 
 logger = Logger(WORKER_NAME)
 log = logger.get_logger()
 
 while True:
     categories = []
+    print("____WORKER____", flush=True)
+    print(SECRET_WORKER_KEY, flush=True)
+    print("____WORKER____", flush=True)
     # get data from server about worker with params
-    response_worker = requests.get(WORKER_DATA_URL+"?name="+WORKER_NAME, headers={"SECRET_CODE": SECRET_WORKER_KEY})
+    response_worker = requests.get(WORKER_DATA_URL+"?name="+WORKER_NAME, headers={"secret-code": SECRET_WORKER_KEY})
     if response_worker.status_code == 200:
         response_worker = response_worker.json()
         if "id" in response_worker:
@@ -90,7 +95,7 @@ while True:
                                 "meta": response_main.get("watchlist_label", ""),
                                 "source": "besplatka"
                             }
-                            response = requests.post(IMPORT_URL, data=data_send, headers={"SECRET_CODE": SECRET_WORKER_KEY})
+                            response = requests.post(IMPORT_URL, data=data_send, headers={"secret-code": SECRET_WORKER_KEY})
                             if response.status_code == 201:
                                 log.debug(f"Added {data_send}")
                             else:
