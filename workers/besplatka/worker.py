@@ -11,9 +11,9 @@ log = logger.get_logger()
 
 while True:
     categories = []
-    print("____WORKER____", flush=True)
-    print(SECRET_WORKER_KEY, flush=True)
-    print("____WORKER____", flush=True)
+    # print("____WORKER____", flush=True)
+    # print(SECRET_WORKER_KEY, flush=True)
+    # print("____WORKER____", flush=True)
     # get data from server about worker with params
     response_worker = requests.get(WORKER_DATA_URL+"?name="+WORKER_NAME, headers={"secret-code": SECRET_WORKER_KEY})
     if response_worker.status_code == 200:
