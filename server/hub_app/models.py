@@ -1,6 +1,12 @@
 from django.db import models
 
 
+class BountyData(models.Model):
+    created = models.DateTimeField(auto_now_add=True)
+    source = models.CharField(max_length=255, default="", blank=True, null=True)
+    data = models.TextField(blank=True, default="")
+
+
 class Phone(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     number = models.CharField(max_length=255, unique=True)

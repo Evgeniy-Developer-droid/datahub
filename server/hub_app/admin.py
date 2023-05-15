@@ -1,5 +1,12 @@
 from django.contrib import admin
-from hub_app.models import Phone
+from hub_app.models import Phone, BountyData
+
+
+class BountyDataAdmin(admin.ModelAdmin):
+    search_fields = ('source',)
+    list_display = ('source', 'data', 'created',)
+
+admin.site.register(BountyData, BountyDataAdmin)
 
 
 class PhoneAdmin(admin.ModelAdmin):
